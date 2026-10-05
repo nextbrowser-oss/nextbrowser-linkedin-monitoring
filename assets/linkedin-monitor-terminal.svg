@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1148" height="378" viewBox="0 0 1148 378" role="img" aria-label="Example linkedin-monitor output: a mention, a company mention and a lead found by search, and a watched company's post, ranked by urgency, each with the reasons and a direct link">
+  <rect x="0.5" y="0.5" width="1147" height="377" rx="12" fill="#0b1120" stroke="#1f2937"/>
+  <path d="M12.5 0.5h1123a12 12 0 0 1 12 12v28h-1147v-28a12 12 0 0 1 12-12z" fill="#111827"/>
+  <circle cx="24" cy="20" r="6" fill="#ff5f57"/>
+  <circle cx="44" cy="20" r="6" fill="#febc2e"/>
+  <circle cx="64" cy="20" r="6" fill="#28c840"/>
+  <text x="574" y="25" text-anchor="middle" fill="#6b7280" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="13">linkedin-monitor — sample output</text>
+  <g font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="13" fill="#e5e7eb">
+    <text x="28" y="72"><tspan fill="#2dd4bf">$</tspan> linkedin-monitor run --profile acme --company Acme --keywords invoicing --accounts in/mila-novak,company/northwind</text>
+    <text x="28" y="96" xml:space="preserve"><tspan fill="#6b7280">09:00</tspan>  <tspan fill="#60a5fa">signed in</tspan> as <tspan fill="#c4b5fd">Dana Reyes</tspan></text>
+    <text x="28" y="120" xml:space="preserve"><tspan fill="#6b7280">09:00</tspan>  <tspan fill="#94a3b8">pass</tspan> <tspan fill="#c4b5fd">Dana Reyes</tspan>: starting line: 4 sources, 6 matches</text>
+    <text x="28" y="144" xml:space="preserve"><tspan fill="#6b7280">10:00</tspan>  <tspan fill="#f87171">HIGH</tspan>    <tspan fill="#c4b5fd">Mila Novak</tspan> mentioned you in a post: <tspan fill="#c4b5fd">Dana Reyes</tspan>, is SSO with Okta on the roadmap for this quarter?</text>
+    <text x="28" y="168" xml:space="preserve"><tspan fill="#6b7280">     </tspan>   <tspan fill="#a7f3d0">[Mentions you · Asks a question]</tspan>  <tspan fill="#64748b">https://www.linkedin.com/feed/update/urn:li:activity:7512807092256769234/</tspan></text>
+    <text x="28" y="192" xml:space="preserve"><tspan fill="#6b7280">10:00</tspan>  <tspan fill="#f87171">HIGH</tspan>    <tspan fill="#c4b5fd">Lee Park</tspan> mentioned <tspan fill="#5eead4">Acme</tspan>: <tspan fill="#5eead4">Acme</tspan> had an outage this morning, anyone else seeing failed syncs?</text>
+    <text x="28" y="216" xml:space="preserve"><tspan fill="#6b7280">     </tspan>   <tspan fill="#a7f3d0">[Mentions your company · Says "outage" · Asks a question]</tspan>  <tspan fill="#64748b">https://www.linkedin.com/feed/update/urn:li:activity:7512809084551169234/</tspan></text>
+    <text x="28" y="240" xml:space="preserve"><tspan fill="#6b7280">10:00</tspan>  <tspan fill="#fbbf24">MEDIUM</tspan>  <tspan fill="#c4b5fd">Ana Lima</tspan> posted (search): Looking for recommendations on an invoicing tool for a 20-person agency</text>
+    <text x="28" y="264" xml:space="preserve"><tspan fill="#6b7280">     </tspan>   <tspan fill="#a7f3d0">[Asks for a recommendation · No comments yet]</tspan>  <tspan fill="#64748b">https://www.linkedin.com/feed/update/urn:li:activity:7512804462428161234/</tspan></text>
+    <text x="28" y="288" xml:space="preserve"><tspan fill="#6b7280">10:00</tspan>  <tspan fill="#94a3b8">low</tspan>     <tspan fill="#5eead4">Northwind</tspan> posted: <tspan fill="#5eead4">Northwind</tspan> Pay is now live in 12 new countries</text>
+    <text x="28" y="312" xml:space="preserve"><tspan fill="#6b7280">     </tspan>   <tspan fill="#64748b">https://www.linkedin.com/feed/update/urn:li:activity:7512800125517825234/</tspan></text>
+    <text x="28" y="336" xml:space="preserve"><tspan fill="#6b7280">10:00</tspan>  <tspan fill="#94a3b8">pass</tspan> <tspan fill="#c4b5fd">Dana Reyes</tspan>: 4 sources: 4 new (2 urgent) of 9 matches; 2 threads read</text>
+  </g>
+</svg>

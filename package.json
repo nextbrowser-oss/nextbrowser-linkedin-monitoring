@@ -1,0 +1,62 @@
+{
+  "name": "@nextbrowser-oss/linkedin-monitoring",
+  "version": "0.1.0",
+  "private": true,
+  "description": "The open-source LinkedIn monitoring engine for Nextbrowser: notifications that mention you or comment on your posts, the posts of the people and companies you watch, and new posts that name your company or keywords, with the post and its author in context, ranked by urgency, read from a signed-in browser profile.",
+  "keywords": [
+    "nextbrowser",
+    "linkedin",
+    "monitoring",
+    "social-listening",
+    "b2b",
+    "mentions",
+    "keywords",
+    "browser-automation",
+    "nbc"
+  ],
+  "homepage": "https://github.com/nextbrowser-oss/nextbrowser-linkedin-monitoring#readme",
+  "bugs": {
+    "url": "https://github.com/nextbrowser-oss/nextbrowser-linkedin-monitoring/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nextbrowser-oss/nextbrowser-linkedin-monitoring.git"
+  },
+  "author": "Nextbrowser contributors",
+  "license": "AGPL-3.0-only",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./node": {
+      "types": "./dist/node/index.d.ts",
+      "import": "./dist/node/index.js"
+    }
+  },
+  "bin": {
+    "linkedin-monitor": "dist/node/bin.js"
+  },
+  "files": [
+    "dist",
+    "LICENSE",
+    "README.md"
+  ],
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "prepare": "npm run build",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "render:terminal": "node scripts/render-terminal.mjs"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "happy-dom": "^20.0.0",
+    "typescript": "^5.9.0",
+    "vitest": "^4.1.9"
+  }
+}

@@ -95,6 +95,10 @@ export interface PostWatch {
   due?: boolean;
   /** When its comments were last read. */
   threadReadAt?: number;
+  /** Reads in a row where the count had grown but the page drew no comments.
+   *  The count is kept until a read draws some, or until this reaches its
+   *  cap. */
+  emptyReads?: number;
   checkedAt: number;
 }
 
@@ -266,6 +270,7 @@ export function normalizeState(raw: unknown): MonitorState {
       ...optional("comments", finite(value.comments)),
       ...(value.due === true ? { due: true } : {}),
       ...optional("threadReadAt", finite(value.threadReadAt)),
+      ...optional("emptyReads", finite(value.emptyReads)),
       checkedAt: finite(value.checkedAt) ?? 0,
     };
   }

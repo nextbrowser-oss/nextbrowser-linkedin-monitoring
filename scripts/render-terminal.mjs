@@ -21,7 +21,7 @@ const found = (time, item, source, urgency, reasons, keywords = []) => ({
 const pass = (patch) => ({
   signedIn: true, handle: "Dana Reyes", loginRequired: false, securityCheck: false, rateLimited: false, searchLimited: false,
   pagesLoaded: 0, sourcesRead: 4, baselines: 0, fallbacks: 0, unreadable: 0, searches: 1, itemsRead: 0, scrolls: 0,
-  matches: 0, newItems: 0, urgent: 0, commentReads: 0, commentReadsDeferred: 0, stopped: false, notes: [], ...patch,
+  matches: 0, newItems: 0, urgent: 0, commentReads: 0, commentReadsDeferred: 0, stopped: false, failed: false, notes: [], ...patch,
 });
 
 const QUERY = "Acme OR invoicing";

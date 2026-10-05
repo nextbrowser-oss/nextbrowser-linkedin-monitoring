@@ -106,6 +106,9 @@ const MAX_STALLS = 2;
  *  feed's wait: a post with no comments draws none, and that is not worth
  *  twenty seconds. */
 const THREAD_WAIT_MS = 12_000;
+/** How many reads in a row may draw none of a post's grown comments before
+ *  its count moves on without them. */
+const EMPTY_READS_TO_GIVE_UP = 3;
 /** The pause before every page after the first, and after every scroll. */
 const PAGE_PAUSE_MS: readonly [number, number] = [6_000, 14_000];
 const SCROLL_PAUSE_MS: readonly [number, number] = [1_500, 4_000];
@@ -173,6 +176,8 @@ export interface PassSummary {
   commentReads: number;
   commentReadsDeferred: number;
   stopped: boolean;
+  /** The pass ended on an error nothing else explains; the note says what. */
+  failed: boolean;
   notes: string[];
 }
 
@@ -330,6 +335,7 @@ class Pass {
     commentReads: 0,
     commentReadsDeferred: 0,
     stopped: false,
+    failed: false,
     notes: [],
   };
 
@@ -383,6 +389,7 @@ class Pass {
         this.summary.blocked = error.message;
         this.note(error.message);
       } else {
+        this.summary.failed = true;
         this.note(`The pass failed: ${errorText(error)}`);
         this.log("pass_error", { error: errorText(error) });
       }
@@ -929,6 +936,29 @@ class Pass {
       if (this.inWindow(idTime ?? range?.latest) && !this.matches.has(item.key)) this.matches.set(item.key, match);
       if (isNew) this.announce(match);
     }
+    // A page that drew none of the comments its count says it has — a slow
+    // load, comments collapsed behind a button — read nothing. Raising the
+    // count would record them as read; keeping it leaves them due, a few times.
+    const known = watch?.comments ?? 0;
+    if (comments.length === 0 && count > known) {
+      const emptyReads = (watch?.emptyReads ?? 0) + 1;
+      if (emptyReads < EMPTY_READS_TO_GIVE_UP) {
+        this.posts[id] = {
+          urn: plan.ref.urn,
+          source: watch?.source ?? plan.sourceKey,
+          own,
+          ...(watch?.comments !== undefined ? { comments: watch.comments } : {}),
+          due: true,
+          emptyReads,
+          ...(watch?.threadReadAt !== undefined ? { threadReadAt: watch.threadReadAt } : {}),
+          checkedAt: this.at,
+        };
+        this.note("A post's page drew none of its new comments; they are read again on the next pass.");
+        this.log("thread_empty", { post: plan.ref.urn, count, known, empty_reads: emptyReads });
+        return;
+      }
+      this.note(`A post's page drew none of its comments ${EMPTY_READS_TO_GIVE_UP} times in a row; its count moves on without them.`);
+    }
     this.posts[id] = {
       urn: plan.ref.urn,
       source: watch?.source ?? plan.sourceKey,
@@ -1010,8 +1040,18 @@ class Pass {
     if (previous) this.sources[key] = { ...previous, note };
   }
 
+  /** remember records a key as seen, and moves one seen again to the end:
+   *  the list keeps the newest keys only, and an item still on screen must
+   *  not fall off it and be announced a second time. */
   private remember(key: string): void {
-    if (this.seen.has(key)) return;
+    if (this.seen.has(key)) {
+      const index = this.seenOrder.lastIndexOf(key);
+      if (index >= 0 && index < this.seenOrder.length - 1) {
+        this.seenOrder.splice(index, 1);
+        this.seenOrder.push(key);
+      }
+      return;
+    }
     this.seen.add(key);
     this.seenOrder.push(key);
   }

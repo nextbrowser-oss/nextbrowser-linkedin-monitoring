@@ -75,7 +75,7 @@ describe("describePass", () => {
   const summary: PassSummary = {
     signedIn: true, handle: "Dana Reyes", loginRequired: false, securityCheck: false, rateLimited: false, searchLimited: false,
     pagesLoaded: 7, sourcesRead: 4, baselines: 0, fallbacks: 1, unreadable: 0, searches: 1, itemsRead: 40, scrolls: 2,
-    matches: 6, newItems: 2, urgent: 1, commentReads: 2, commentReadsDeferred: 0, stopped: false, notes: [],
+    matches: 6, newItems: 2, urgent: 1, commentReads: 2, commentReadsDeferred: 0, stopped: false, failed: false, notes: [],
   };
 
   it("sums a pass up in one line", () => {

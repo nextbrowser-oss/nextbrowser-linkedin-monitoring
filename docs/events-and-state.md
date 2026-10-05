@@ -97,6 +97,7 @@ A restriction and the search limit have no event of their own: the summary carri
 | `newItems`, `urgent` | New matches, and how many are *high*. |
 | `commentReads`, `commentReadsDeferred` | Posts opened for their comments, and posts whose comments are due but wait for the next pass. |
 | `stopped` | `shouldStop` ended the pass early. |
+| `failed` | The pass ended on an error nothing else explains — a browser that died, a script that threw. The note says what. |
 | `notes` | Up to six sentences a person can read. |
 
 ## The state document

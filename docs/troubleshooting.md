@@ -45,6 +45,10 @@ Neither the activity page nor the posts tab drew a post, and neither said the ac
 
 The notifications page or a search page drew nothing and said nothing. Same as above: one pass is a slow load; every pass is a change on LinkedIn's side.
 
+## "A post's page drew none of its new comments"
+
+The post's count grew, but its page showed no comments: LinkedIn was slow, or collapsed them behind "Load more comments". The post stays due and is read again on the next pass. After three such reads in a row the monitor gives up on those comments and says so; open the post by hand if they matter.
+
 ## "The comments on a post could not be read"
 
 Opening a post or reading its comments failed — the page was replaced while it was read, or the browser did not answer. The post keeps its count and is marked due, and the next pass opens it again. A post that is gone ("This post cannot be displayed") is dropped from the watch list instead.

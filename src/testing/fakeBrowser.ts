@@ -70,6 +70,9 @@ export class FakeLinkedIn implements MonitorBrowser {
   threads: Record<string, FakeThread> = {};
   /** Post ids whose thread read throws. */
   readonly failThreads = new Set<string>();
+  /** Posts whose page draws their count but none of their comments, as a
+   *  slow load or collapsed comments do. */
+  readonly hideComments = new Set<string>();
   pageSize = 4;
   scrolled = 0;
   readonly opened: string[] = [];
@@ -206,7 +209,7 @@ export class FakeLinkedIn implements MonitorBrowser {
           gate,
           post,
           comments_text: post?.comments_text ?? "",
-          comments: thread?.comments ?? [],
+          comments: this.hideComments.has(at.id) ? [] : thread?.comments ?? [],
         } satisfies ThreadSnapshot;
       }
       default:

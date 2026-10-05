@@ -131,6 +131,8 @@ Opening a post is a page load of its own, so comments are read sparingly. A post
 
 A post seen for the first time is only recorded; its comments are part of the starting line — unless the post itself is new, and then its comments are all new too. A pass opens at most `maxCommentReads` posts (4), the account's own first, then posts about the account, then the watched accounts' posts. A post past that is marked due (`state.posts[id].due`), so the next pass opens it — nothing is skipped, only delayed — and the summary says how many wait.
 
+A post page that draws none of the comments its count says were added — a slow load, comments collapsed behind a button — has read nothing, so the post keeps its old count and stays due. After three such reads in a row the count moves on without them, with a note, so one stubborn post cannot take a read from every pass forever.
+
 On the post's page, the post itself and its comments and replies are read. A comment's id, like a post's, carries its time, so a comment is new when it was created after the starting line of the source that surfaced the post. A post whose page will not open is dropped from the watch list (it was deleted); a read that fails keeps the post due and its count as it was, and the next pass tries again.
 
 ## Triage

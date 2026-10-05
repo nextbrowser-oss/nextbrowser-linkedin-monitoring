@@ -455,6 +455,36 @@ describe("comments", () => {
     expect(texts((await pass(failed.state)).events)).toEqual(["Acme invoicing question"]);
   });
 
+  it("keeps a post whose page drew none of its new comments due, then gives up after a few tries", async () => {
+    const first = await pass(watching());
+    later();
+    grow(watched, rawComment(watched, "Bo Chen", "Acme invoicing question", { at: soon() }));
+    li.hideComments.add(idOf(watched));
+    const empty = await pass(first.state);
+    expect(fresh(empty.events)).toHaveLength(0);
+    expect(empty.summary.notes).toContain("A post's page drew none of its new comments; they are read again on the next pass.");
+    expect(empty.state.posts[idOf(watched)]).toMatchObject({ comments: 2, due: true, emptyReads: 1 });
+    li.hideComments.clear();
+    later();
+    const read = await pass(empty.state);
+    expect(texts(read.events)).toEqual(["Acme invoicing question"]);
+
+    later();
+    grow(watched, rawComment(watched, "Cy Diaz", "Acme again", { at: soon() }));
+    li.hideComments.add(idOf(watched));
+    let state = read.state;
+    const notes: string[] = [];
+    for (let attempt = 0; attempt < 3; attempt += 1) {
+      const result = await pass(state);
+      notes.push(...result.summary.notes);
+      state = result.state;
+      later();
+    }
+    expect(notes).toContain("A post's page drew none of its comments 3 times in a row; its count moves on without them.");
+    expect(state.posts[idOf(watched)]).toMatchObject({ comments: 4 });
+    expect(state.posts[idOf(watched)]?.due).toBeUndefined();
+  });
+
   it("reads the comments of a post that is itself new", async () => {
     const first = await pass(watching());
     later();

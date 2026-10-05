@@ -1,6 +1,6 @@
 {
   "name": "@nextbrowser-oss/linkedin-monitoring",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "description": "The open-source LinkedIn monitoring engine for Nextbrowser: notifications that mention you or comment on your posts, the posts of the people and companies you watch, and new posts that name your company or keywords, with the post and its author in context, ranked by urgency, read from a signed-in browser profile.",
   "keywords": [
